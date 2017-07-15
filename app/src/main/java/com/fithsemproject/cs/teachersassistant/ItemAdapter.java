@@ -49,7 +49,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 //                .into(holder.ivImg);
 
 
-        holder.tvText.setText(item.id);
+        holder.tvText.setText(item.title);
+        holder.dateText.setText(item.Department);
+        //holder.tvText.setText(item.id);
 
         // holder.dateText.setText(dateCalculator(item.date));
     }
@@ -76,7 +78,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             cvItem = (CardView) itemView.findViewById(R.id.cvItem);
             //ivImg = (ImageView) itemView.findViewById(R.id.ivMainImage);
             tvText = (TextView) itemView.findViewById(R.id.tvTitle);
-            //dateText = (TextView) itemView.findViewById(R.id.dateText);
+            dateText = (TextView) itemView.findViewById(R.id.dateText);
         }
 
     }

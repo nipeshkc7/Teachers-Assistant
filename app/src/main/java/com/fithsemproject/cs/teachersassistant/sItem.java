@@ -5,9 +5,17 @@ public class sItem {
     public String img;
     public String title;
     public String content;
-    public String id;
+    public int id;
+    public String Department;
     public String date;
     public String link;
+
+
+    public String getDepartment() {
+        return img;
+    }
+
+    public void setDepartment(String Department){this.Department=Department; }
 
     public String getImg() {
         return img;
@@ -25,11 +33,11 @@ public class sItem {
         this.title = title;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
