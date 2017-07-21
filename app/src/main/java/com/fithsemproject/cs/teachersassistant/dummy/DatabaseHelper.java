@@ -81,6 +81,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
+    public Cursor getStudentdata(int classId){
+        SQLiteDatabase db= this.getWritableDatabase();
+        Cursor res= db.rawQuery("select * from "+TABLE2+" where CLASS_ID="+classId,null);
+        return res;
+    }
+
     public void clearAll(){
         //Clear all data from the database
         //Never actually called
@@ -108,6 +114,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long result=db.insert(TABLE2,null,contentValues);
         return result != -1;
     }
+
+
 
     public boolean commenceAttendance(int classId){
         //New entry for attendance table

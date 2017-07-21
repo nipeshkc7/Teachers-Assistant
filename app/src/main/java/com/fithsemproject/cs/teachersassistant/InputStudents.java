@@ -45,7 +45,7 @@ import static android.Manifest.permission.READ_CONTACTS;
 public class InputStudents extends AppCompatActivity {
 
     private EditText name,roll_no;
-    int roll;
+    int classId;
     Button btn;
     DatabaseHelper myDb;
 
@@ -58,28 +58,32 @@ public class InputStudents extends AppCompatActivity {
         name=(EditText)findViewById(R.id.student_name);
         roll_no=(EditText)findViewById(R.id.roll_no);
         btn=(Button)findViewById(R.id.submit);
-
         //Get Class ID
-        roll=Integer.parseInt(roll_no.getText().toString());
-       // AddData();
+
+        Intent intent=getIntent();
+        Bundle b = this.getIntent().getExtras();
+        classId= b.getInt("class");
+
+        AddData();
     }
 
-//    public void AddData(){
-//        btn.setOnClickListener(
-//                new View.OnClickListener(){
-//
-//                    @Override
-//                    public void onClick(View v) {
-//                        boolean isInserted=myDb.insertData(name.getText().toString(),roll,classId);
-//                        if(isInserted){
-//                            Toast.makeText(getApplicationContext(),"DataInserted",Toast.LENGTH_LONG).show();
-//                            Log.i("INSERT",":DataInserted");
-//                            finish();
-//                        }else{
-//                            Toast.makeText(getApplicationContext(),"Failed to insert data",Toast.LENGTH_LONG).show();
-//                        }
-//                    }
-//                }
-//        );
-//    }
+    public void AddData(){
+        btn.setOnClickListener(
+                new View.OnClickListener(){
+
+                    @Override
+                    public void onClick(View v) {
+                        boolean isInserted=myDb.addStudents(name.getText().toString(),Integer.parseInt(roll_no.getText().toString()),classId);
+                        if(isInserted){
+                            Toast.makeText(getApplicationContext(),"New Student Added",Toast.LENGTH_LONG).show();
+                            Log.i("INSERT",":DataInserted");
+                            finish();
+                        }else{
+                            Toast.makeText(getApplicationContext(),"Failed to insert data",Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
+        );
+    }
+
 }

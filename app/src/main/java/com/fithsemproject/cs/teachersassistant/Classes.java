@@ -58,32 +58,7 @@ public class Classes extends Fragment {
 
             }
         });
-        //Create a test list
-//        for(int i=0;i<5;i++) {
-//            sItem sitem = new sItem();
-//            sitem.setId("Class "+ i);
-//            list.add(sitem);
-//        }
-//
 
-//        myDb=new DatabaseHelper(getContext());
-//        Cursor res= myDb.getAllData();
-//        if(res.getCount()==0){
-//            Toast.makeText(getContext(),"Unable to link database",Toast.LENGTH_LONG).show();
-//        }else{
-//            StringBuffer buffer=new StringBuffer();
-//            while(res.moveToNext()){
-//                sItem sItem=new sItem();
-//                sItem.setId(res.getString(0));
-//                sItem.setTitle(res.getString(1));
-//                sItem.setDepartment(res.getString(2));
-//                list.add(sItem);
-//            }
-//        }
-//
-//        //Get database instance
-//        adapter = new ItemAdapter(getContext(), list);
-//        rvItem.setAdapter(adapter);
         refreshList();
 
         rvItem.addOnItemTouchListener(
@@ -92,7 +67,11 @@ public class Classes extends Fragment {
                     public void onItemClick(View view, int position) {
                         Intent intent=new Intent(getContext(),Students.class);
                         //Get class id and send it to Student Activity
-                        intent.putExtra("classId",list.get(position).id);
+                        Toast.makeText(getContext(),"Current class id is  " + list.get(position).id,Toast.LENGTH_LONG).show();
+                        //intent.putExtra("class",list.get(position).id);
+                        Bundle b = new Bundle();
+                        b.putInt("class", list.get(position).id);
+                        intent.putExtras(b);
                         startActivity(intent);
 
                     }

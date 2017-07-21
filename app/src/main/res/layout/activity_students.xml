@@ -20,7 +20,18 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_students" />
+    <!--<include layout="@layout/content_students" />-->
+    <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/student_gridview"
+        android:numColumns="auto_fit"
+        android:gravity="center"
+        android:columnWidth="100dp"
+        android:layout_marginTop="70dp"
+        android:stretchMode="columnWidth"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+    </GridView>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
