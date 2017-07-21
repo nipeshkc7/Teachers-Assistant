@@ -35,11 +35,17 @@
         <activity
             android:name=".input_data"
             android:label="@string/title_activity_input_data" />
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Students"
+            android:label="@string/title_activity_students"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".InputStudents"
+            android:label="@string/title_activity_input_students"></activity>
     </application>
 
 </manifest>

@@ -90,6 +90,11 @@ public class Classes extends Fragment {
                 new RecyclerItemClickListener(getContext(), rvItem ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
+                        Intent intent=new Intent(getContext(),Students.class);
+                        //Get class id and send it to Student Activity
+                        intent.putExtra("classId",list.get(position).id);
+                        startActivity(intent);
+
                     }
 
                     @Override

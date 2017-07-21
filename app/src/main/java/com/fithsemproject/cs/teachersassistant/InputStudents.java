@@ -3,11 +3,10 @@ package com.fithsemproject.cs.teachersassistant;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
 
@@ -43,11 +42,10 @@ import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via email/password.
  */
-public class input_data extends AppCompatActivity  {
+public class InputStudents extends AppCompatActivity {
 
-    // UI references.
-   //private AutoCompleteTextView mEmailView;
-    private EditText title,department,year,semester;
+    private EditText name,roll_no;
+    int roll;
     Button btn;
     DatabaseHelper myDb;
 
@@ -55,33 +53,33 @@ public class input_data extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_input_data);
+        setContentView(R.layout.activity_input_students);
         myDb=new DatabaseHelper(this);
-        title=(EditText)findViewById(R.id.class_title);
-        department=(EditText)findViewById(R.id.department);
-        year=(EditText)findViewById(R.id.Year);
-        semester=(EditText)findViewById(R.id.Semester);
-        btn=(Button)findViewById(R.id.done);
-        AddData();
+        name=(EditText)findViewById(R.id.student_name);
+        roll_no=(EditText)findViewById(R.id.roll_no);
+        btn=(Button)findViewById(R.id.submit);
+
+        //Get Class ID
+        roll=Integer.parseInt(roll_no.getText().toString());
+       // AddData();
     }
 
-    public void AddData(){
-        btn.setOnClickListener(
-                new View.OnClickListener(){
-
-                    @Override
-                    public void onClick(View v) {
-                        boolean isInserted=myDb.insertData(title.getText().toString(),department.getText().toString());
-                        if(isInserted){
-                            Toast.makeText(getApplicationContext(),"DataInserted",Toast.LENGTH_LONG).show();
-                            Log.i("INSERT",":DataInserted");
-                            finish();
-                        }else{
-                            Toast.makeText(getApplicationContext(),"Failed to insert data",Toast.LENGTH_LONG).show();
-                        }
-                    }
-                }
-        );
-    }
+//    public void AddData(){
+//        btn.setOnClickListener(
+//                new View.OnClickListener(){
+//
+//                    @Override
+//                    public void onClick(View v) {
+//                        boolean isInserted=myDb.insertData(name.getText().toString(),roll,classId);
+//                        if(isInserted){
+//                            Toast.makeText(getApplicationContext(),"DataInserted",Toast.LENGTH_LONG).show();
+//                            Log.i("INSERT",":DataInserted");
+//                            finish();
+//                        }else{
+//                            Toast.makeText(getApplicationContext(),"Failed to insert data",Toast.LENGTH_LONG).show();
+//                        }
+//                    }
+//                }
+//        );
+//    }
 }
-

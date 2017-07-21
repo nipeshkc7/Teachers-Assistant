@@ -23,4 +23,6 @@
         completions."
     </string>
     <string name="title_activity_visual_attendance">visual_attendance</string>
+    <string name="title_activity_students">Students</string>
+    <string name="title_activity_input_students">Add student info</string>
 </resources>
