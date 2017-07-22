@@ -45,7 +45,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".InputStudents"
-            android:label="@string/title_activity_input_students"></activity>
+            android:label="@string/title_activity_input_students" />
+        <activity android:name=".manualAttendance" />
+        <activity android:name=".TickBoxAttendance"></activity>
     </application>
 
 </manifest>

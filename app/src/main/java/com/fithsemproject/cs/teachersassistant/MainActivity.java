@@ -3,6 +3,7 @@ package com.fithsemproject.cs.teachersassistant;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -26,6 +27,13 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("Start ","MainActivity");
+        DatabaseHelper myDb = new DatabaseHelper(getApplicationContext());;
+//        Cursor res= myDb.getAllAttendanceRecords();
+//        while(res.moveToNext()) {
+//            Log.i("ATI_ID", res.getString(0));
+//            Log.i("Attendance ID", res.getString(1));
+//            Log.i("Student ID ", res.getString(2));
+//        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

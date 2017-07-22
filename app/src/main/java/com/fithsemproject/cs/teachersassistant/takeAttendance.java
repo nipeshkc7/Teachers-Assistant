@@ -41,7 +41,16 @@ public class takeAttendance extends Fragment {
             }
         });
 
-        //return inflater.inflate(R.layout.fragment_visual_attendance, container, false);
+        FloatingActionButton fab2=(FloatingActionButton)rootView.findViewById(R.id.floatingActionButton2);
+
+        fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getContext(),manualAttendance.class);
+                startActivity(intent);
+            }
+        });
         return rootView;
 
     }

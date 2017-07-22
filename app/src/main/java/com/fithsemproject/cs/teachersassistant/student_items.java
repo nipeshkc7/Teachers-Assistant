@@ -8,7 +8,15 @@ public class student_items {
     public String studentName;
     public int studentId;
     public int rollNo;
+    boolean isSelected=false;
 
+    public void toggleSelected(){
+       if(isSelected){
+           isSelected=false;
+       }else{
+           isSelected=true;
+       }
+    }
     public String getStudentName(){
         return studentName;
     }
@@ -27,6 +35,14 @@ public class student_items {
 
     public int getRollNo(){
         return rollNo;
+    }
+
+    public void setStudentId(int studentId){
+        this.studentId=studentId;
+    }
+
+    public boolean getIsSelected(){
+        return isSelected;
     }
 
 

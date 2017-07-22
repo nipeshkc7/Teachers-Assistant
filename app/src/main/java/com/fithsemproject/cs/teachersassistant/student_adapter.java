@@ -1,6 +1,8 @@
 package com.fithsemproject.cs.teachersassistant;
 
 import android.content.Context;
+import android.media.Image;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,11 +21,16 @@ public class student_adapter extends BaseAdapter{
     private Context context;
     //private final String[] videosList;
     private ArrayList<student_items> list;
+    ImageView imageView;
+    private Integer[] mThumbIds = {
+    R.drawable.ic_menu_camera,R.drawable.ic_menu_gallery};
 
     public student_adapter(Context context, ArrayList<student_items> list) {
         this.context = context;
         this.list=list;
     }
+
+
 
     public View getView(int position, View convertView, ViewGroup parent) {
         student_items Student_items;
@@ -33,45 +40,29 @@ public class student_adapter extends BaseAdapter{
 
         View gridView;
 
-        if (convertView == null) {
+        ViewHolder holder;
 
             gridView = new View(context);
-
-            // get layout from grid_design.xml
-            gridView = inflater.inflate(R.layout.grid_design, null);
-
-            // set value into textview
-            TextView textView = (TextView) gridView
+     convertView = inflater.inflate(R.layout.grid_design, null);
+            holder=new ViewHolder();
+            holder.img=(ImageView) convertView.findViewById(R.id.grid_item_image);
+            holder.txt=(TextView) convertView
                     .findViewById(R.id.grid_item_label);
-            textView.setText(Student_items.studentName);
+            holder.txt.setText(Student_items.studentName);
+            imageView=(ImageView) holder.img.findViewById(R.id.grid_item_image);
+            if(Student_items.getIsSelected()) {
+                imageView.setImageResource(R.drawable.ic_menu_slideshow );
+                Log.i("Toggle","Now change to slideshow");
+            }
+            else {
+                imageView.setImageResource(R.drawable.ic_menu_camera );
+                Log.i("Toggle","Now change to camera");
+            }
 
-            // set image based on selected text
-            //ImageView imageView = (ImageView) gridView
-            //        .findViewById(R.id.grid_item_image);
-
-
-            //insert image here
-            //THIS WORKS !!! for urls only...
-//            Picasso.with(context)
-//                    .load(videoItems.img)
-//                    .placeholder(R.drawable.ggg)
-//                    .error(android.R.drawable.stat_notify_error)
-//                    .into((ImageView)gridView.findViewById(R.id.grid_item_image));
+                convertView.setTag(holder);
 
 
-
-
-            //String mobile = videosList[position];
-
-
-            //    imageView.setImageResource(R.drawable.ggg);
-
-
-        } else {
-            gridView = (View) convertView;
-        }
-
-        return gridView;
+        return convertView;
     }
 
     @Override
@@ -80,8 +71,8 @@ public class student_adapter extends BaseAdapter{
     }
 
     @Override
-    public Object getItem(int position) {
-        return null;
+    public ImageView getItem(int position) {
+        return imageView;
     }
 
     @Override
@@ -89,4 +80,13 @@ public class student_adapter extends BaseAdapter{
         return 0;
     }
 
+    public static class ViewHolder {
+        ImageView img;
+        TextView txt;
+    }
+
+    public void updateContent(ArrayList<student_items> updates) {
+        this.list=updates;
+        this.notifyDataSetChanged();
+    }
 }

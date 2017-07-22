@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Created by Dell on 7/11/2017.
@@ -49,7 +50,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("create table " + TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, TITLE TEXT, DEPARTMENT TEXT)");
         db.execSQL("create table " + TABLE2 + "(STUDENT_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, CLASS_ID INTEGER NOT NULL, STUDENT_NAME TEXT, ROLL_NO INTEGER NOT NULL, FOREIGN KEY(CLASS_ID) REFERENCES class_table(ID) )");
         db.execSQL("create table " + TABLE3 + "(ATTENDANCE_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, CLASS_ID INTEGER NOT NULL, DAY DATETIME DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY(CLASS_ID) REFERENCES class_table(ID))");
-        db.execSQL("create table " + TABLE4 + "(ATI_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, ATTENDANCE_ID INTEGER NOT NULL, STUDENT_ID INTEGER NOT NULL, FOREIGN KEY(ATTENDANCE_ID) REFERENCES attendance_table(ATTENDANCE_ID), FOREIGN KEY(STUDENT_ID) REFERENCES student_table(STUDENT_ID) )");
+//        db.execSQL("create table " + TABLE4 + "(ATI_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, ATTENDANCE_ID INTEGER NOT NULL, STUDENT_ID INTEGER NOT NULL, FOREIGN KEY(ATTENDANCE_ID) REFERENCES attendance_table(ATTENDANCE_ID), FOREIGN KEY(STUDENT_ID) REFERENCES student_table(STUDENT_ID) )");
+        db.execSQL("create table " + TABLE4 + "(ATTENDANCE_ID INTEGER NOT NULL, STUDENT_ID INTEGER NOT NULL, FOREIGN KEY(ATTENDANCE_ID) REFERENCES attendance_table(ATTENDANCE_ID), FOREIGN KEY(STUDENT_ID) REFERENCES student_table(STUDENT_ID),PRIMARY KEY(ATTENDANCE_ID,STUDENT_ID) )");
 
     }
 
@@ -57,6 +59,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS "+TABLE2);
+        db.execSQL("DROP TABLE IF EXISTS "+TABLE3);
+        db.execSQL("DROP TABLE IF EXISTS "+TABLE4);
         onCreate(db);
     }
 
@@ -130,8 +135,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return result != -1;
 
-
     }
+
+
+    public int deleteLatestAttendance(){
+        SQLiteDatabase db=this.getWritableDatabase();
+        Cursor res= db.rawQuery("SELECT MAX(ATTENDANCE_ID) FROM "+TABLE3,null);
+        //Cursor res=db.rawQuery("select ATTENDANCE_ID from "+ TABLE3 +" ORDER BY ATTENDANCE_ID DESC LIMIT 1",null);
+        int attendance_id=0;
+        while(res.moveToNext()) {
+            Log.i("toBeDeleted", res.getString(0));
+            attendance_id=Integer.parseInt(res.getString(0));
+            db.execSQL("delete from "+ TABLE3 + " where ATTENDANCE_ID="  + Integer.parseInt(res.getString(0)));
+        }
+
+        return attendance_id;
+    }
+
+    public int getAttendanceid(){
+        SQLiteDatabase db=this.getWritableDatabase();
+        Cursor res= db.rawQuery("SELECT MAX(ATTENDANCE_ID) FROM "+TABLE3,null);
+        int attendance_id=0;
+        while(res.moveToNext()) {
+            Log.i("Present", res.getString(0));
+            attendance_id=Integer.parseInt(res.getString(0));
+        }
+
+        return attendance_id;
+    }
+
     public boolean takeAttendance(int attendanceId,int studentId){
         //Function to take attendance
 
@@ -142,6 +174,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long result=db.insert(TABLE4,null,contentValues);
         return result != -1;
 
+    }
+
+    public Cursor getAllAttendanceRecords(){
+        SQLiteDatabase db= this.getWritableDatabase();
+        Cursor res= db.rawQuery("select * from "+TABLE4,null);
+        return res;
     }
 
 }
