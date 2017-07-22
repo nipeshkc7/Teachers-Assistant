@@ -86,8 +86,8 @@ public class MainActivity extends AppCompatActivity
 
             // Handle the camera action
             android.support.v4.app.FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
-            visualAttendance visualAttendance=new visualAttendance();
-            ft.replace(R.id.fragment_container,visualAttendance);
+            takeAttendance TakeAttendance=new takeAttendance();
+            ft.replace(R.id.fragment_container,TakeAttendance);
             ft.commit();
 
         } else if (id == R.id.nav_gallery) {

@@ -17,10 +17,10 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class visualAttendance extends Fragment {
+public class takeAttendance extends Fragment {
 
 
-    public visualAttendance() {
+    public takeAttendance() {
         // Required empty public constructor
     }
 
