@@ -47,7 +47,8 @@
             android:name=".InputStudents"
             android:label="@string/title_activity_input_students" />
         <activity android:name=".manualAttendance" />
-        <activity android:name=".TickBoxAttendance"></activity>
+        <activity android:name=".TickBoxAttendance" />
+        <activity android:name=".dummy.Table_view"></activity>
     </application>
 
 </manifest>

@@ -33,7 +33,9 @@ public class Classes extends Fragment {
     private RecyclerView rvItem;
     private ArrayList<sItem> list= new ArrayList<>();
    DatabaseHelper myDb;
+
     public Classes() {
+
         // Required empty public constructor
     }
 
@@ -61,50 +63,7 @@ public class Classes extends Fragment {
 
         refreshList();
 
-        rvItem.addOnItemTouchListener(
-                new RecyclerItemClickListener(getContext(), rvItem ,new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-                        Intent intent=new Intent(getContext(),Students.class);
-                        //Get class id and send it to Student Activity
-                        Toast.makeText(getContext(),"Current class id is  " + list.get(position).id,Toast.LENGTH_LONG).show();
-                        //intent.putExtra("class",list.get(position).id);
-                        Bundle b = new Bundle();
-                        b.putInt("class", list.get(position).id);
-                        intent.putExtras(b);
-                        startActivity(intent);
 
-                    }
-
-                    @Override
-                    public void onLongItemClick(View view, final int position) {
-                        // do whatever
-                        Toast.makeText(getContext(),"Long press " + list.get(position).id,Toast.LENGTH_LONG).show();
-                        AlertDialog.Builder a_builder=new AlertDialog.Builder(getContext());
-                        a_builder.setMessage("Delete this class ?")
-                        .setCancelable(true)
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                myDb.deleteSelected(list.get(position).id);
-                                refreshList();
-                            }
-                        })
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        })
-                        ;
-                        AlertDialog alert=a_builder.create();
-                        alert.setTitle("Delete ?");
-
-                        alert.show();
-
-                    }
-                })
-        );
 
         return rootview;
     }
@@ -136,7 +95,7 @@ public class Classes extends Fragment {
 //        //Get database instance
         ItemAdapter adapter = new ItemAdapter(getContext(), list);
         rvItem.setAdapter(adapter);
-
+        myDb.close();
     }
 
 

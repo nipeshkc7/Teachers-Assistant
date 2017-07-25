@@ -22,8 +22,6 @@ public class student_adapter extends BaseAdapter{
     //private final String[] videosList;
     private ArrayList<student_items> list;
     ImageView imageView;
-    private Integer[] mThumbIds = {
-    R.drawable.ic_menu_camera,R.drawable.ic_menu_gallery};
 
     public student_adapter(Context context, ArrayList<student_items> list) {
         this.context = context;

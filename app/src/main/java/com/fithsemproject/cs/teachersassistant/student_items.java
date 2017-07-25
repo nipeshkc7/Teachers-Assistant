@@ -10,6 +10,7 @@ public class student_items {
     public int rollNo;
     boolean isSelected=false;
 
+
     public void toggleSelected(){
        if(isSelected){
            isSelected=false;

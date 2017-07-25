@@ -63,6 +63,7 @@ public class input_data extends AppCompatActivity  {
         semester=(EditText)findViewById(R.id.Semester);
         btn=(Button)findViewById(R.id.done);
         AddData();
+        myDb.close();
     }
 
     public void AddData(){
@@ -83,5 +84,6 @@ public class input_data extends AppCompatActivity  {
                 }
         );
     }
+
 }
 

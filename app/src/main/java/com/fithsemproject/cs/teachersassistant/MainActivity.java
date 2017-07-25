@@ -99,7 +99,10 @@ public class MainActivity extends AppCompatActivity
             ft.commit();
 
         } else if (id == R.id.nav_gallery) {
-
+            android.support.v4.app.FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
+            viewAttendance viewAttendance=new viewAttendance();
+            ft.replace(R.id.fragment_container,viewAttendance,"view");
+            ft.commit();
         } else if (id == R.id.nav_slideshow) {
             android.support.v4.app.FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
             Classes classes=new Classes();

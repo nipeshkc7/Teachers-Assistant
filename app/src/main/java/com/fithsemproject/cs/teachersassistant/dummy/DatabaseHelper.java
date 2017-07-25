@@ -29,7 +29,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE3="attendance_table";
     public static final String TAB3COL1="ATTENDANCE_ID";
     public static final String TAB3COL2="CLASS_ID";
-    public static final String TAB3COL3="DATE";
+    public static final String TAB3COL3="DAY";
 
     public static final String TABLE4="attendees_table";
     public static final String TAB4COL1="ATI_ID";
@@ -89,6 +89,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getStudentdata(int classId){
         SQLiteDatabase db= this.getWritableDatabase();
         Cursor res= db.rawQuery("select * from "+TABLE2+" where CLASS_ID="+classId,null);
+        return res;
+    }
+
+    public Cursor getStudentName(int classId){
+        SQLiteDatabase db= this.getWritableDatabase();
+        Cursor res= db.rawQuery("select STUDENT_NAME, STUDENT_ID from "+TABLE2+" where CLASS_ID="+classId,null);
         return res;
     }
 
@@ -179,7 +185,50 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getAllAttendanceRecords(){
         SQLiteDatabase db= this.getWritableDatabase();
         Cursor res= db.rawQuery("select * from "+TABLE4,null);
+
         return res;
+
+    }
+
+    public Cursor getClassIds(){
+        SQLiteDatabase db=this.getWritableDatabase();
+        Cursor res= db.rawQuery("select ID FROM "+ TABLE_NAME ,null);
+        return res;
+    }
+
+    public Cursor getAttInfo(int attendanceId){
+        SQLiteDatabase db=this.getWritableDatabase();
+
+//        Cursor res= db.rawQuery("select "+TABLE3+".ATTENDANCE_ID,"+TABLE3+".DAY,"+TABLE3+".CLASS_ID,"+TABLE4+".STUDENT_ID FROM " +TABLE3+
+//                " INNER JOIN "+TABLE4+ " ON "+TABLE3+".ATTENDANCE_ID="+TABLE4+".ATTENDANCE_ID WHERE "+TABLE3+".CLASS_ID="+classId,null);
+        Cursor res= db.rawQuery("select "+TABLE3+".ATTENDANCE_ID,"+TABLE3+".DAY,"+TABLE3+".CLASS_ID,"+TABLE4+".STUDENT_ID FROM " +TABLE3+
+                " INNER JOIN "+TABLE4+ " ON "+TABLE3+".ATTENDANCE_ID="+TABLE4+".ATTENDANCE_ID WHERE "+TABLE3+".ATTENDANCE_ID="+attendanceId,null);
+        return res;
+    }
+
+    public Cursor getAttId(int classId){
+        SQLiteDatabase db=this.getWritableDatabase();
+
+        Cursor res=db.rawQuery("select ATTENDANCE_ID FROM "+TABLE3+ " WHERE CLASS_ID="+classId,null);
+        return res;
+    }
+
+    public int getTotalStudents(int classId){
+        SQLiteDatabase db=this.getWritableDatabase();
+        Cursor res=db.rawQuery("select * FROM "+TABLE2+ " WHERE CLASS_ID="+classId,null);
+        return res.getCount();
+    }
+
+    public String getClassTitle(int classId){
+        SQLiteDatabase db=this.getWritableDatabase();
+        Cursor res=db.rawQuery("SELECT TITLE FROM "+ TABLE_NAME + " where ID="  + classId,null);
+        String classTitle="";
+        while(res.moveToNext()) {
+
+            classTitle=res.getString(0);
+
+        }
+        return classTitle;
     }
 
 }
