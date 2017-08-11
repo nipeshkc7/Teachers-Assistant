@@ -8,9 +8,9 @@
         android:id="@+id/grid_item_image"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginRight="10dp"
-        android:src="@drawable/ic_menu_gallery" >
-    </ImageView>
+        android:src="@drawable/ic_menu_send"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"></ImageView>
 
     <TextView
         android:id="@+id/grid_item_label"

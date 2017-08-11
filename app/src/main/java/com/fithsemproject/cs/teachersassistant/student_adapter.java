@@ -49,11 +49,11 @@ public class student_adapter extends BaseAdapter{
             holder.txt.setText(Student_items.studentName);
             imageView=(ImageView) holder.img.findViewById(R.id.grid_item_image);
             if(Student_items.getIsSelected()) {
-                imageView.setImageResource(R.drawable.ic_menu_slideshow );
+                imageView.setImageResource(R.mipmap.ic_launcher );
                 Log.i("Toggle","Now change to slideshow");
             }
             else {
-                imageView.setImageResource(R.drawable.ic_menu_camera );
+                imageView.setImageResource(R.mipmap.ic_face );
                 Log.i("Toggle","Now change to camera");
             }
 

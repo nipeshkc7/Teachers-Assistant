@@ -18,9 +18,11 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.fithsemproject.cs.teachersassistant.dummy.DatabaseHelper;
+import com.fithsemproject.cs.teachersassistant.dummy.Table_view;
 
 import java.util.ArrayList;
 
+import static com.fithsemproject.cs.teachersassistant.R.id.start;
 import static com.fithsemproject.cs.teachersassistant.R.id.view;
 
 
@@ -50,6 +52,9 @@ public class Classes extends Fragment {
         rvItem.setHasFixedSize(true);
         final LinearLayoutManager manager = new LinearLayoutManager(getContext());
         rvItem.setLayoutManager(manager);
+
+
+
         FloatingActionButton myFab = (FloatingActionButton)  rootview.findViewById(R.id.fabAdd);
 
         myFab.setOnClickListener(new View.OnClickListener() {
@@ -62,6 +67,49 @@ public class Classes extends Fragment {
         });
 
         refreshList();
+  rvItem.addOnItemTouchListener(
+          new RecyclerItemClickListener(getContext(), rvItem ,new RecyclerItemClickListener.OnItemClickListener() {
+                                            @Override
+                                            public void onItemClick(View view, int position) {
+                                                Intent intent=new Intent(getContext(),Students.class);
+                                                Bundle b= new Bundle();
+                                                b.putInt("class",list.get(position).id);
+                                                intent.putExtras(b);
+                                                startActivity(intent);
+                                                }
+
+              @Override
+
+              public void onLongItemClick(View view, final int position) {
+                  // do whatever
+                  Toast.makeText(getContext(),"Long press " + list.get(position).id,Toast.LENGTH_LONG).show();
+                  AlertDialog.Builder a_builder=new AlertDialog.Builder(getContext());
+                  a_builder.setMessage("Delete this class ?")
+                          .setCancelable(true)
+                          .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                                                   myDb.deleteSelected(list.get(position).id);
+                                                                   refreshList();
+                                                               }
+                         })
+                                                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                                                    dialog.cancel();
+                                                                }
+                         })
+                                                            ;
+                                                    AlertDialog alert=a_builder.create();
+                                                    alert.setTitle("Delete ?");
+
+                                                            alert.show();
+
+                                                        }
+                                        })
+                                    );
+
+
 
 
 
