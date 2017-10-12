@@ -1,0 +1,57 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="70dp"
+    tools:context="com.fithsemproject.cs.teachersassistant.takeAttendance">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="121dp"
+        android:layout_height="101dp"
+        android:layout_gravity="center|top"
+        android:layout_marginTop="50dp"
+        android:clickable="true"
+        app:backgroundTint="@android:color/holo_blue_light"
+        app:fabSize="mini"
+        app:srcCompat="@drawable/ic_menu_camera" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Visual Attendance"
+        android:layout_marginTop="190dp"
+        android:layout_gravity="center|top"
+        android:textSize="20dp"
+        android:textAllCaps="true"
+        />
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton2"
+        android:layout_width="121dp"
+        android:layout_height="101dp"
+        android:layout_gravity="center|top"
+        android:layout_marginTop="250dp"
+        android:clickable="true"
+        android:tint="@android:color/black"
+        app:backgroundTint="@android:color/holo_blue_light"
+        app:fabSize="mini"
+        app:rippleColor="@android:color/black"
+        app:srcCompat="@android:drawable/ic_menu_day" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Manual Attendance"
+        android:textSize="20dp"
+        android:layout_marginTop="390dp"
+        android:layout_gravity="center|top"
+        android:textAllCaps="true"
+        />
+
+</FrameLayout>
